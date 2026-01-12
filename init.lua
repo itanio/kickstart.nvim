@@ -104,6 +104,14 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+-- Map custom file extensions to filetypes for lsp
+vim.filetype.add {
+  extension = {
+    gohtml = 'gotmpl',
+    gotmpl = 'gotmpl',
+  },
+}
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -653,6 +661,10 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        'golangci-lint',
+        'gopls',
+        'gofumpt',
+        'goimports',
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -716,7 +728,9 @@ require('lazy').setup({
         typescriptreact = { 'prettier' },
         css = { 'prettier' },
         markdown = { 'prettier' },
-        sh = { ' prettier' },
+        sh = { 'prettier' },
+        go = { 'goimports', 'gofumpt' },
+        gotmpl = { 'prettier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -901,7 +915,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'go', 'gotmpl', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
