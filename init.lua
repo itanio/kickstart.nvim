@@ -719,7 +719,7 @@ require('lazy').setup({
         markdown = { 'prettier' },
         sh = { 'prettier' },
         go = { 'goimports', 'gofumpt' },
-        gotmpl = { 'prettiergo_pls' },
+        gotmpl = { 'prettier', 'go_pls' },
         python = { 'black' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -915,7 +915,7 @@ require('lazy').setup({
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
-    main = 'nvim-treesitter.config', -- Sets main module to use for opts
+    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = { 'bash', 'c', 'go', 'gotmpl', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
@@ -936,20 +936,6 @@ require('lazy').setup({
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-  },
-  { -- Enables Markdown previews outside of WSL
-
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    ft = { 'markdown' },
-    build = 'cd app && npm install',
-    config = function()
-      vim.g.mkdp_browser = 'chrome.exe'
-      vim.g.mkdp_auto_close = 1
-      vim.g.mkdp_echo_preview_url = 0
-      vim.g.mkdp_open_ip = '127.0.0.1'
-      vim.g.mkdp_port = '8082'
-    end,
   },
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
