@@ -11,7 +11,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -631,6 +631,8 @@ require('lazy').setup({
             },
           },
         },
+        pyright = {},
+        ruff = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -717,7 +719,8 @@ require('lazy').setup({
         markdown = { 'prettier' },
         sh = { 'prettier' },
         go = { 'goimports', 'gofumpt' },
-        gotmpl = { 'prettier' },
+        gotmpl = { 'prettiergo_pls' },
+        python = { 'black' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -728,7 +731,7 @@ require('lazy').setup({
   },
 
   { --Colorization of color values
-    'norcalli/nvim-colorizer.lua',
+    'NvChad/nvim-colorizer.lua',
     config = function()
       require('colorizer').setup()
     end,
@@ -852,7 +855,20 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'mellifluous'
+      vim.cmd.colorscheme 'everforest'
+    end,
+  },
+
+  {
+    'neanias/everforest-nvim',
+    version = false,
+    lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
+    config = function()
+      require('everforest').setup {
+        background = 'medium',
+      }
     end,
   },
 
@@ -930,7 +946,7 @@ require('lazy').setup({
     config = function()
       vim.g.mkdp_browser = 'chrome.exe'
       vim.g.mkdp_auto_close = 1
-      vim.g.mkdp_echo_preview_url = '0'
+      vim.g.mkdp_echo_preview_url = 0
       vim.g.mkdp_open_ip = '127.0.0.1'
       vim.g.mkdp_port = '8082'
     end,
